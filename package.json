@@ -1,0 +1,19 @@
+{
+    "name": "oddball",
+    "version": "0.0.0",
+    "license": "MIT",
+    "description": "odds based game probability",
+    "keywords": [
+        "odds"
+    ],
+    "repository": "domrally/oddball",
+    "homepage": "dommandy.com/oddball",
+    "type": "module",
+    "files": [
+        "code/*.js",
+        "code/*.d.ts"
+    ],
+    "scripts": {
+        "test": "node tests"
+    }
+}
