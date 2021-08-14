@@ -7,8 +7,9 @@
     <link rel="shortcut icon" href="#">
     <script type="module">
         import { Die } from 'https://unpkg.com/oddball'
-        const dice = document.getElementById('dice')
-        const die = new Die([
+        const d4 = document.getElementById('d4')
+        const d6 = document.getElementById('d6')
+        const die4 = new Die([
             ['⚀', 1],
             ['⚁', 1],
             ['⚂', 1],
@@ -16,11 +17,19 @@
             ['⚄', 1],
             ['⚅', 1]
         ])
-        const pips = document.getElementById('pips')
+        const die6 = new Die([
+            ['⚀', 1],
+            ['⚁', 1],
+            ['⚂', 1],
+            ['⚃', 1],
+        ])
+        const pips4 = d4.getElementById('pips')
+        const pips6 = d6.getElementById('pips')
         while (true) {
             if (dice.checked) {
                 await new Promise(r => setTimeout(r, 50))
-                pips.innerText = die.reroll()
+                pips4.innerText = die4.reroll()
+                pips6.innerText = die6.reroll()
             } else {
                 await new Promise(r => requestAnimationFrame(r))
             }
@@ -34,9 +43,8 @@
             width: 100vw;
             height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            overflow: hidden;
         }
 
         #dice {
@@ -57,11 +65,16 @@
             color: #000;
         }
     </style>
-    <label>
+    <h2>d4</h2>
+    <label id="d4">
         <input id="dice" type="checkbox" checked>
         <span id="pips"></span>
     </label>
-    </input>
+    <h2>d6</h2>
+    <label id="d6">
+        <input id="dice" type="checkbox" checked>
+        <span id="pips"></span>
+    </label>
 </body>
 
 </html>
