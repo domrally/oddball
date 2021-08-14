@@ -17,6 +17,8 @@ const sum = (numbers) => {
 };
 const bit_length = (n) => n.toString(2).length;
 const flip = () => crypto.getRandomValues(new Uint32Array(1))[0] % 2;
+// https://arxiv.org/pdf/2003.03830.pdf
+// https://github.com/probcomp/fast-loaded-dice-roller/blob/master/src/python/fldr.py
 export class Die {
     constructor(faces) {
         _Die_instances.add(this);
