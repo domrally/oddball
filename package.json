@@ -9,11 +9,16 @@
     "repository": "domrally/oddball",
     "homepage": "dommandy.com/oddball",
     "type": "module",
+    "main": "main",
+    "types": "main",
     "files": [
         "code/*.js",
         "code/*.d.ts"
     ],
     "scripts": {
-        "test": "node tests"
+        "test": "node test"
+    },
+    "dependencies": {
+        "mealtime": "^0.0.14"
     }
 }
