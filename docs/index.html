@@ -9,6 +9,8 @@
         import { Die } from 'https://unpkg.com/oddball'
         const d4 = document.getElementById('d4')
         const d6 = document.getElementById('d6')
+        const dice4 = d4.getElementById('dice')
+        const dice6 = d6.getElementById('dice')
         const die4 = new Die([
             ['⚀', 1],
             ['⚁', 1],
@@ -26,13 +28,18 @@
         const pips4 = d4.getElementById('pips')
         const pips6 = d6.getElementById('pips')
         while (true) {
-            if (dice.checked) {
+            if (dice4.checked && dice6.checked) {
                 await new Promise(r => setTimeout(r, 50))
                 pips4.innerText = die4.reroll()
                 pips6.innerText = die6.reroll()
-            } else {
-                await new Promise(r => requestAnimationFrame(r))
+            } else if (dice6.checked) {
+                await new Promise(r => setTimeout(r, 50))
+                pips6.innerText = die6.reroll()
+            } else if (dice4.checked) {
+                await new Promise(r => setTimeout(r, 50))
+                pips4.innerText = die4.reroll()
             }
+            await new Promise(r => requestAnimationFrame(r))
         }
     </script>
 </head>
