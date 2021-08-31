@@ -1,10 +1,12 @@
+import { Coin } from "./coins"
+
 const phi = Math.sqrt(1.25) - .5
 const sum = (numbers: number[]) => {
     const summer = (sum: number, value: number) => sum + value
     return numbers.reduce(summer)
 }
 const bit_length = (n: number) => n.toString(2).length
-const flip = () => crypto.getRandomValues(new Uint32Array(1))[0] % 2
+
 // https://arxiv.org/pdf/2003.03830.pdf
 // https://github.com/probcomp/fast-loaded-dice-roller/blob/master/src/python/fldr.py
 export class Die<T> {
@@ -48,8 +50,9 @@ export class Die<T> {
         if (numberOfSides === 1) return 0
         let d = 0
         let c = 0
+        const coin = new Coin()
         while (true) {
-            const b = flip()
+            const b = coin.toss()
             d = 2 * d + (1 - b)
             if (d < h[c]) {
                 const z = H[d][c]
