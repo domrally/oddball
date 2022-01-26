@@ -18,6 +18,13 @@ import {errorFunction} from 'oddball';
 
 <br>
 
+`` `md``
+```md
+[![](https://img.shields.io/badge/math-oddball-006eff)](https://github.com/domrally/oddball)
+```
+
+<br>
+
 <br>
 
 [![](https://img.shields.io/npm/v/oddball?style=for-the-badge&label=version&logo=npm&color=CB3837)](./package.json
