@@ -13,7 +13,7 @@ npm i oddball
 
 `` `js`` 
 ```js
-import {errorFunction} from 'https://cdn.skypack.dev/oddball?min';
+import {errorFunction} from 'oddball';
 ```
 
 <br>
