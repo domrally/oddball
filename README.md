@@ -11,6 +11,13 @@ npm i oddball
 
 <br>
 
+`` `js`` 
+```js
+import {errorFunction} from 'https://cdn.skypack.dev/oddball?min';
+```
+
+<br>
+
 <br>
 
 [![](https://img.shields.io/npm/v/oddball?style=for-the-badge&label=version&logo=npm&color=CB3837)](./package.json
