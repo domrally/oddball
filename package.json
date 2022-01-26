@@ -10,7 +10,6 @@
         "entropy",
         "discrepancy"
     ],
-    "type": "module",
     "main": "build/code/exports.js",
     "types": "build/types/exports.d.ts",
     "files": [

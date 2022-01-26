@@ -1,1 +1,1 @@
-export { errorFunction } from './exports/error-function.js';
+export {errorFunction} from './exports/error-function.js';

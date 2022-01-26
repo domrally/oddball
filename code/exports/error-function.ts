@@ -1,11 +1,11 @@
 import {a} from '../modules/constants.js';
-import { inverseErrorFunction } from '../modules/inverse-error-fucntion.js'
+import {inverseErrorFunction} from '../modules/inverse-error-fucntion.js';
 // https://en.wikipedia.org/wiki/Error_function#Approximation_with_elementary_functions
 //
 //  • approximation is given by Sergei Winitzki
 //    using his "global Padé approximations":
 type t = (x: number) => number;
-export const errorFunction: t & { inverse: t } = (x = 0) => {
+export const errorFunction: t & {inverse: t} = (x = 0) => {
   const {PI: π, exp, sign, sqrt} = Math,
     //
     //   𝑥²
@@ -32,4 +32,4 @@ export const errorFunction: t & { inverse: t } = (x = 0) => {
   return sign(x) * sqrt(square);
 };
 
-errorFunction.inverse = inverseErrorFunction
+errorFunction.inverse = inverseErrorFunction;
