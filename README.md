@@ -1,4 +1,4 @@
-# oddball
+# Oddball
 
 unbiased · high entropy · low disparity
 
