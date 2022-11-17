@@ -8,7 +8,7 @@ export interface LatentFeature {
 	 */
 	new (amount: number): Filter<LatentFeature>
 }
-export const LatentFeature = function (amount: number) {
+export const LatentFeature = function (_amount: number) {
 	let feature = 0
 
 	// 1st the signal is delay embedded into n dimensions
