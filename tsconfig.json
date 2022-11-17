@@ -1,17 +1,12 @@
 {
-  "extends": "./node_modules/gts/tsconfig-google.json",
-  "compilerOptions": {
-    "rootDir": "code",
-    "lib": [
-        "es2018", 
-        "dom"
-    ],
-    "outDir": "build/code",
-    "declarationDir": "build/types"
-  },
-  "include": [
-    "code/**/*.ts",
-    "code/**/*.css",
-    "code/**/*.html"
-  ]
+	"extends": "@tsconfig/node18-strictest/tsconfig.json",
+	"display": "oddball",
+	"include": ["src/**/*", "test/**/*"],
+	"compilerOptions": {
+		"declaration": true,
+		"declarationDir": "typings",
+		"module": "ESNext",
+		"outDir": "dist",
+		"target": "ESNext"
+	}
 }
