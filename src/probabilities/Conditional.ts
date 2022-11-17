@@ -1,38 +1,33 @@
 import type { Probability } from './Probability'
 
-/**
- * Probability of observing the effect in a given subset
- */
 export interface Conditional<T = any> {
 	/**
-	 * Creates a new conditional probability function
+	 * ℙ effect | subset
+	 * Probability of observing the effect in a given subset
 	 * @param samples - condition and effect observations
 	 */
-	new <T>(samples: T[][]): Probability<T, Conditional<T>>
-
-	/**
-	 * Probability of observing the effect in a given subset
-	 * @param events - condition and effect factuals
-	 * @returns ℙ effect | subset
-	 */
-	(...events: T[]): number
+	new <T>(
+		samples: [interventions: T, ...mediators: T[], outcomes: T][]
+	): Probability<Conditional, T>
 }
 
 export const Conditional = function (samples: [][]) {
-	return ((...events) => {
+	return ((causes, effects) => {
 		// CONDITIONAL PROBABILITY
 		// https://en.wikipedia.org/wiki/Conditional_probability
 
 		const // conditioned subset
+			{ length } = causes,
 			subset = samples.filter(sample =>
-				sample.slice(0, -1).every((condition, i) => condition === events[i])
-			),
-			// size of the affected subset
-			pop = events.pop()
+				sample.slice(0, length).every((x, i) => x === causes[i])
+			)
 
-		return pop
-			? subset.filter(sample => pop === sample.slice(-2, -1)?.[0]).length /
+		// affected subset
+		return effects
+			? subset.filter(sample =>
+					sample.slice(length, 0).every((x, i) => x === effects[i])
+			  ).length /
 					(subset.length | 1)
 			: subset.length / samples.length
-	}) as Conditional
+	}) as Probability<Conditional>
 } as unknown as Conditional

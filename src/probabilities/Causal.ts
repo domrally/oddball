@@ -1,34 +1,28 @@
 import { Conditional } from './Conditional'
 import type { Probability } from './Probability'
 
-/**
- * Probability of observing the effect after intervention
- */
 export interface Causal<T = any> {
 	/**
-	 * Creates a new causal probability function
-	 * @param samples - intervention, mediation, and effect observations
-	 */
-	new <T>(samples: T[][]): Probability<T, Causal<T>>
-
-	/**
+	 * ℙ effect <- cause
 	 * Probability of observing the effect after intervention
-	 * @param events - intervention, mediation, and effect factuals
-	 * @returns ℙ effect <- cause
+	 * @param samples - intervention, mediation, and outcome observations
 	 */
-	(...events: T[]): number
+	new <T>(
+		samples: [interventions: T, ...mediators: T[], outcomes: T][]
+	): Probability<Causal, T>
 }
 
-export const Causal = function <T>(samples: T[][]) {
-	return ((...events) => {
+export const Causal = function <T>(
+	...samples: [interventions: T, ...mediators: T[], outcomes: T][]
+) {
+	return ((causes, effects) => {
 		// FRONT DOOR ADJUSTMENT
 		// https://www.ams.org/journals/notices/201907/rnoti-p1093.pdf
 
 		let causal = 0,
-			effect = events.pop(),
 			conditional = new Conditional(samples),
-			mediations = new Set(samples.map(sample => sample.slice(-2, -1)[0] as T)),
-			interventions = new Set(samples.map(sample => sample[0] as T))
+			mediations = new Set(samples.flatMap(sample => sample.slice(1, -1))),
+			interventions = new Set(samples.flatMap(sample => sample.slice(-1, 0)))
 
 		// sum over mediation effects
 		for (const mediation of mediations) {
@@ -37,15 +31,15 @@ export const Causal = function <T>(samples: T[][]) {
 			for (const intervention of interventions) {
 				counterfactual +=
 					// marginal probability of observing counterfactual intervention
-					conditional(intervention, null as T) *
+					conditional([intervention]) *
 					// probability of observing non causal effects
-					conditional(intervention, mediation, effect)
+					conditional([intervention, mediation], effects)
 			}
 			// probability of observing causal mediation
-			const mediator = conditional(...events, mediation)
+			const mediator = conditional(causes, [mediation])
 
 			causal += mediator * counterfactual
 		}
 		return causal
-	}) as Causal
+	}) as Probability<Causal>
 } as unknown as Causal

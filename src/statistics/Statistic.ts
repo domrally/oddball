@@ -3,9 +3,11 @@
  */
 export type Statistic<
 	S extends {
-		new (): Statistic<S>
-		(_: [x: number, y: number][]): number
+		new (samples: [x: number, y: number][]): Statistic<S>
 	}
 > = S & {
-	[key: PropertyKey]: any
+	/**
+	 *
+	 */
+	(): number
 }

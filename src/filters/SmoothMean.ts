@@ -1,11 +1,14 @@
 import Yallist from 'yallist'
 import type { Filter } from './Filter'
 
-/**
- * Moving average low pass filter
- * @param window - size of the filter window
- * @returns smoothed signal
- */
+export interface SmoothMean {
+	/**
+	 * Moving average low pass filter
+	 * @param window - size of the filter window
+	 * @returns smoothed signal
+	 */
+	new (window: number): Filter<SmoothMean>
+}
 export const SmoothMean = function (window: number) {
 	let mean = 0,
 		samples = new Yallist(Array<number>(window).fill(0))
@@ -26,24 +29,6 @@ export const SmoothMean = function (window: number) {
 			mean += newSample - oldSample
 		}
 
-		return mean
-	}) as SmoothMean
+		return [mean]
+	}) as Filter<SmoothMean>
 } as unknown as SmoothMean
-
-/**
- * Probability of observing the effect after intervention
- */
-export interface SmoothMean {
-	/**
-	 * Creates a new causal probability function
-	 * @param samples - intervention, mediation, and effect observations
-	 */
-	new (window: number): Filter<SmoothMean>
-
-	/**
-	 * Probability of observing the effect after intervention
-	 * @param events - intervention, mediation, and effect factuals
-	 * @returns ℙ effect <- cause
-	 */
-	(sample?: number): number
-}

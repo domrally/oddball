@@ -2,11 +2,15 @@
  * Chance of observation
  */
 export type Probability<
-	T,
 	P extends {
-		new (_: T[][]): Probability<T, P>
-		(..._: T[]): number
-	}
+		new (
+			samples: [interventions: T, ...mediators: T[], outcomes: T][]
+		): Probability<P, T>
+	},
+	T = any
 > = P & {
-	[key: PropertyKey]: any
+	/**
+	 *
+	 */
+	(causes: T[], effects?: T[]): number
 }

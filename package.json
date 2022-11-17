@@ -31,6 +31,7 @@
 	},
 	"dependencies": {
 		"functional-red-black-tree": "*",
+		"ml-pca": "*",
 		"yallist": "*"
 	},
 	"devDependencies": {

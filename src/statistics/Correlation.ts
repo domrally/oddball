@@ -1,12 +1,15 @@
 import type { Statistic } from './Statistic'
 
-/**
- * https://arxiv.org/pdf/1909.10140.pdf
- * @param samples pairs of samples from two distributions
- * @returns Chatterjee's correlation coefficient
- */
-export const Correlation = function () {
-	return (samples => {
+export interface Correlation {
+	/**
+	 * Chatterjee's rank correlation coefficient
+	 * https://arxiv.org/pdf/1909.10140.pdf
+	 * @param samples - pairs of samples from two distributions
+	 */
+	new (samples: [x: number, y: number][]): Statistic<Correlation>
+}
+export const Correlation = function (samples: [x: number, y: number][]) {
+	return (() => {
 		const //
 			sum = samples
 				// sort by y
@@ -31,23 +34,5 @@ export const Correlation = function () {
 			{ length } = samples
 
 		return 1 - (3 * sum) / (length * length - 1)
-	}) as Correlation
+	}) as Statistic<Correlation>
 } as unknown as Correlation
-
-/**
- * Probability of observing the effect after intervention
- */
-export interface Correlation {
-	/**
-	 * Creates a new causal probability function
-	 * @param samples - intervention, mediation, and effect observations
-	 */
-	new (): Statistic<Correlation>
-
-	/**
-	 * Probability of observing the effect after intervention
-	 * @param events - intervention, mediation, and effect factuals
-	 * @returns ℙ effect <- cause
-	 */
-	(samples: [x: number, y: number][]): number
-}

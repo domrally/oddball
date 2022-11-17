@@ -1,10 +1,13 @@
 import type { Filter } from './Filter'
 
-/**
- * High pass filter with exponential falloff
- * @param amount - 0 to 1
- * @returns sharpened signal
- */
+export interface SharpenExponent {
+	/**
+	 * High pass filter with exponential falloff
+	 * @param amount - 0 to 1
+	 * @returns sharpened signal
+	 */
+	new (amount: number): Filter<SharpenExponent>
+}
 export const SharpenExponent = function (amount: number) {
 	let old = 0,
 		sharp = 0,
@@ -20,24 +23,6 @@ export const SharpenExponent = function (amount: number) {
 			old = sample
 		}
 
-		return sharp
-	}) as SharpenExponent
+		return [sharp]
+	}) as Filter<SharpenExponent>
 } as unknown as SharpenExponent
-
-/**
- * Probability of observing the effect after intervention
- */
-export interface SharpenExponent {
-	/**
-	 * Creates a new causal probability function
-	 * @param samples - intervention, mediation, and effect observations
-	 */
-	new (window: number): Filter<SharpenExponent>
-
-	/**
-	 * Probability of observing the effect after intervention
-	 * @param events - intervention, mediation, and effect factuals
-	 * @returns ℙ effect <- cause
-	 */
-	(sample?: number): number
-}
