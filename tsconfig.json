@@ -4,7 +4,8 @@
 	"include": ["src/**/*", "test/**/*"],
 	"compilerOptions": {
 		"declaration": true,
-		"module": "System",
-		"out": "index.js"
+		"module": "None",
+		"outFile": "index.js",
+		"target": "ESNext"
 	}
 }
