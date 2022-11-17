@@ -1,3 +1,11 @@
 {
-  "extends": "./node_modules/gts/"
+	"extends": ["alloy", "alloy/typescript", "prettier"],
+	"rules": {
+		"@typescript-eslint/method-signature-style": ["error", "method"],
+		"max-classes-per-file": ["error", 1],
+		"no-return-assign": ["error", "except-parens"],
+		"object-shorthand": ["error", "always"],
+		"one-var": ["error", "consecutive"],
+		"radix": ["error", "as-needed"]
+	}
 }
