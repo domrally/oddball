@@ -22,7 +22,7 @@
 		"url": "git+https://github.com/domrally/oddball.git"
 	},
 	"scripts": {
-		"restart": "node --no-warnings --experimental-modules -r dotenv/config --loader ts-node/esm --inspect --experimental-specifier-resolution=node",
+		"restart": "node --no-warnings --experimental-modules --loader ts-node/esm --inspect --experimental-specifier-resolution=node",
 		"start": "npx tsc && npx uglifyjs index.js -o index.js -c -m --mangle-props --no-annotations",
 		"stop": "npm update && npx eslint --fix && npx prettier --write .",
 		"test": "npm restart test && npx eslint && npx prettier --check ."
