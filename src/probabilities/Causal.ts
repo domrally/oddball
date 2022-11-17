@@ -13,7 +13,7 @@ export interface Causal<T = any> {
 }
 
 export const Causal = function <T>(
-	...samples: [interventions: T, ...mediators: T[], outcomes: T][]
+	samples: [interventions: T, ...mediators: T[], outcomes: T][]
 ) {
 	return ((causes, effects) => {
 		// FRONT DOOR ADJUSTMENT
@@ -22,7 +22,7 @@ export const Causal = function <T>(
 		let causal = 0,
 			conditional = new Conditional(samples),
 			mediations = new Set(samples.flatMap(sample => sample.slice(1, -1))),
-			interventions = new Set(samples.flatMap(sample => sample.slice(-1, 0)))
+			interventions = new Set(samples.flatMap(([sample]) => sample))
 
 		// sum over mediation effects
 		for (const mediation of mediations) {
