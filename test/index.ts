@@ -1,4 +1,7 @@
-import { Conditional } from '../src/index'
+import { Causal } from '../src/index'
 
-const conditional = new Conditional([['foo']])
-console.log(conditional('foo', null as any))
+const causal = new Causal([
+	['foo', 'bar', 'fur'],
+	['bar', 'baz', 'mix'],
+])
+console.log(causal('foo', 'mix'))

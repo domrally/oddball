@@ -5,11 +5,11 @@
 	"author": "Dom Mandy",
 	"license": "MIT",
 	"type": "module",
-	"types": "index.d.ts",
+	"main": "index.js",
+	"types": "typings/index.d.ts",
 	"homepage": "https://domrally.github.io/oddball",
 	"files": [
-		"index.js",
-		"index.d.ts"
+		"typings/**/*"
 	],
 	"exports": {
 		".": "./index.js"
@@ -23,7 +23,9 @@
 	},
 	"scripts": {
 		"restart": "node --no-warnings --experimental-modules --loader ts-node/esm --inspect --experimental-specifier-resolution=node",
-		"start": "npx tsc && npx uglifyjs index.js -o index.js -c -m --mangle-props --no-annotations",
+		"prestart": "rm -rf typings && npx tsc",
+		"start": "rollup dist/src/index.js --compact -f es -o index.js && terser index.js -c -m --mangle-props --module --toplevel -f semicolons=false -o index.js",
+		"poststart": "mv typings/src/* typings && rm -rf dist && rm -rf typings/test && rm -rf typings/src",
 		"stop": "npm update && npx eslint --fix && npx prettier --write .",
 		"test": "npm restart test && npx eslint && npx prettier --check ."
 	},
@@ -42,9 +44,10 @@
 		"eslint-config-alloy": "*",
 		"eslint-config-prettier": "*",
 		"prettier": "*",
+		"rollup": "*",
+		"terser": "*",
 		"ts-node": "*",
-		"typescript": "*",
-		"uglify-js": "*"
+		"typescript": "*"
 	},
 	"keywords": [
 		"analysis",

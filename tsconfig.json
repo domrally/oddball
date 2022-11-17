@@ -4,8 +4,9 @@
 	"include": ["src/**/*", "test/**/*"],
 	"compilerOptions": {
 		"declaration": true,
-		"module": "None",
-		"outFile": "index.js",
+		"declarationDir": "typings",
+		"module": "ESNext",
+		"outDir": "dist",
 		"target": "ESNext"
 	}
 }

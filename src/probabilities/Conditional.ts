@@ -1,23 +1,5 @@
 import type { Probability } from './Probability'
 
-export const Conditional = function (samples: [][]) {
-	return ((...events) => {
-		// CONDITIONAL PROBABILITY
-		// https://en.wikipedia.org/wiki/Conditional_probability
-
-		const // conditioned subset
-			subset = samples.filter(sample =>
-				sample.slice(0, -1).every((condition, i) => condition === events[i])
-			),
-			// size of the affected subset
-			pop = events.pop()
-
-		return pop
-			? subset.filter(sample => pop === sample.pop()).length / subset.length
-			: subset.length / samples.length
-	}) as Conditional
-} as unknown as Conditional
-
 /**
  * Probability of observing the effect in a given subset
  */
@@ -35,3 +17,22 @@ export interface Conditional<T = any> {
 	 */
 	(...events: T[]): number
 }
+
+export const Conditional = function (samples: [][]) {
+	return ((...events) => {
+		// CONDITIONAL PROBABILITY
+		// https://en.wikipedia.org/wiki/Conditional_probability
+
+		const // conditioned subset
+			subset = samples.filter(sample =>
+				sample.slice(0, -1).every((condition, i) => condition === events[i])
+			),
+			// size of the affected subset
+			pop = events.pop()
+
+		return pop
+			? subset.filter(sample => pop === sample.slice(-2, -1)?.[0]).length /
+					(subset.length | 1)
+			: subset.length / samples.length
+	}) as Conditional
+} as unknown as Conditional
