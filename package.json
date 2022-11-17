@@ -7,14 +7,6 @@
 	"type": "module",
 	"types": "index.d.ts",
 	"homepage": "https://domrally.github.io/oddball",
-	"keywords": [
-		"odds",
-		"statistics",
-		"random",
-		"sampling",
-		"entropy",
-		"discrepancy"
-	],
 	"files": [
 		"index.js",
 		"index.d.ts"
@@ -53,5 +45,34 @@
 		"ts-node": "*",
 		"typescript": "*",
 		"uglify-js": "*"
-	}
+	},
+	"keywords": [
+		"analysis",
+		"bayes",
+		"bijection",
+		"causal",
+		"conditional",
+		"discrepancy",
+		"door",
+		"entropy",
+		"error",
+		"exponential",
+		"factor",
+		"filter",
+		"frequentist",
+		"front",
+		"function",
+		"mean",
+		"median",
+		"odds",
+		"probability",
+		"random",
+		"sample",
+		"sawtooth",
+		"sharpen",
+		"simulation",
+		"smooth",
+		"statistics",
+		"wave"
+	]
 }
